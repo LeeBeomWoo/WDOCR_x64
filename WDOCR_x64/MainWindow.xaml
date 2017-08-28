@@ -1,0 +1,71 @@
+﻿<Window x:Class="WDOCR_x64.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WDOCR_x64"
+        mc:Ignorable="d"
+        Title="MainWindow" MinWidth="915" MinHeight="535" d:DesignWidth="915" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" >
+    <Grid MinWidth="910" MinHeight="480" Margin="0,0,0,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="475"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="503*"/>
+            <ColumnDefinition Width="404*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.ColumnSpan="2" VerticalAlignment="Top" Height="30" MinWidth="890" MinHeight="30" Margin="0,0,1,0">
+            <MenuItem x:Name="load_Btn" Header="파일 불러오기" Height="24" Width="88" Click="Load_Btn_Click"/>
+            <Label x:Name="filepath_txtB" Height="25" Content="please load to file" MinWidth="280" Width="346" />
+            <Separator Width="6"/>
+            <Label Content="칸 높이 :" Height="24" Width="58"/>
+            <ComboBox x:Name="height_comB" Height="24" Width="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="height_comB_SelectedIndexChanged" >
+                <ComboBoxItem Content="6"/>
+                <ComboBoxItem Content="7"/>
+                <ComboBoxItem Content="8"/>
+                <ComboBoxItem Content="9"/>
+                <ComboBoxItem Content="10"/>
+                <ComboBoxItem Content="12"/>
+                <ComboBoxItem Content="14"/>
+                <ComboBoxItem Content="16"/>
+                <ComboBoxItem Content="18"/>
+                <ComboBoxItem Content="20"/>
+                <ComboBoxItem Content="22"/>
+            </ComboBox>
+            <Label Content="칸 갯수 :" Height="24" Width="58"/>
+            <ComboBox x:Name="width_comB" Height="24" Width="42" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" SelectionChanged="width_comB_SelectedIndexChanged">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="5"/>
+                <ComboBoxItem Content="6"/>
+                <ComboBoxItem Content="7"/>
+                <ComboBoxItem Content="8"/>
+                <ComboBoxItem Content="9"/>
+                <ComboBoxItem Content="10"/>
+            </ComboBox>
+            <Separator Background="Black" BorderBrush="Black" MinWidth="2" HorizontalAlignment="Left" Width="7"/>
+            <MenuItem x:Name="result_Btn" Header="이미지 변환" Height="24" Width="83" Click="result_Btn_Click" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+            <MenuItem x:Name="convert_Btn" Header="문자로 변환" Height="24" Width="83" Click="Convert_Btn_MouseDown" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+        </Menu>
+        <RichTextBox x:Name="result_rtxtB" MinHeight="450" MinWidth="500" Background="{x:Null}" Margin="1,30,2,0" MaxWidth="1000" MaxHeight="950">
+            <FlowDocument Language="ko-kr">
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Margin="0,30,0,0" MinWidth="395" MinHeight="450" Grid.Column="1" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.RowSpan="2">
+            <Canvas x:Name="pic_imgB" Grid.Row="1" MinWidth="388" MinHeight="457" FocusManager.IsFocusScope="True"  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="1" MouseEnter="pic_imgB_MouseEnter" KeyDown="pic_imgB_KeyDown" >
+                <Canvas.Background>
+                    <ImageBrush Stretch="UniformToFill"/>
+                </Canvas.Background>
+                <Canvas.LayoutTransform>
+                    <ScaleTransform ScaleX="{Binding Path=Value, ElementName=zoomSlider}" 
+                            ScaleY="{Binding Path=Value, ElementName=zoomSlider}"/>
+                </Canvas.LayoutTransform>
+            </Canvas>
+        </ScrollViewer>
+    </Grid>
+</Window>
